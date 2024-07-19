@@ -5,24 +5,91 @@
   <title>Web Sprint 2 Challenge</title>
   <script id="challenge">
     // 👉 CHALLENGE 1
+    
     function profileActivation(profile, reason) {
+          if (profile.active) {
+          if (reason === undefined) {
+            return "confirm status manually";
+          } else {
+            profile.active = false;
+            profile.reason = reason;
+          }
+        } else {
+          profile.active = true;
+          delete profile.reason;
+        }
+        
+        return profile;
+      }
 
-    }
 
     // 👉 CHALLENGE 2
+  
     function mineSweeper(grid, x, y) {
 
+        if(x < 1 || x > 3 || y < 1 || y > 3 ) {
+          return "invalid coordinates";
+        }
+      
+      let cell = grid[y - 1][x -1];
+
+      if (cell === "🟥") {
+        return "🟥 💀";
+    } else if (cell === "🟦") {
+        return "🟦 🥳";
     }
+}
 
     // 👉 CHALLENGE 3
     function booleanize(obj) {
+      let newObj = {};
 
+    for (let key in obj) {
+    
+    if (key.length > 9) {
+        return "shorten all prop names to 9 chars or less";
     }
+
+    if (obj[key] === 0) {
+        newObj[key] = false;
+    } else if (obj[key] === 1) {
+        newObj[key] = true;
+    } else if (obj[key] === null) {
+        delete newObj[key];
+    } else {
+        newObj[key] = obj[key];
+    }
+}
+
+return newObj;
+}
 
     // 👉 CHALLENGE 4
     function scrub(text, forbidden) {
 
+      if (text === "" || forbidden.length === 0) {
+        return text;
     }
+
+  
+    text = text.replace(/[^\w\s]/g, '');
+
+    
+    let words = text.split(" ");
+
+
+    for (let i = 0; i < words.length; i++) {
+        
+        if (forbidden.includes(words[i])) {
+            
+            words[i] = "x".repeat(words[i].length);
+        }
+    }
+
+
+    return words.join(" ");
+}
+      
 
     // 👉 CHALLENGE 5 (bonus, NOT graded)
     function normalizePhoneNumber(num) {
